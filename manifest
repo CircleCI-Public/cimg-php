@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+repository=php
+parent=base
+variants=(node)
