@@ -8,7 +8,7 @@ LABEL maintainer="CircleCI Community & Partner Engineering Team <community-partn
 # https://github.com/CircleCI-Public/cimg-base/issues/16
 ENV DEBIAN_FRONTEND=noninteractive
 
-ENV PHP_VERSION 7.2.20
+ENV PHP_VERSION 7.2.21
 ENV PHP_MINOR 7.2
 
 # This RUN step can be removed when issue is fixed.
