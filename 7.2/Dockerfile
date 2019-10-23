@@ -1,20 +1,11 @@
 # vim:set ft=dockerfile:
 
-FROM cimg/base:stable
+FROM cimg/base:2019.10
 
 LABEL maintainer="CircleCI Community & Partner Engineering Team <community-partner@circleci.com>"
 
-# This line should be removed once issue is fixed:
-# https://github.com/CircleCI-Public/cimg-base/issues/16
-ENV DEBIAN_FRONTEND=noninteractive
-
-ENV PHP_VERSION 7.2.23
+ENV PHP_VERSION 7.2.24
 ENV PHP_MINOR 7.2
-
-# This RUN step can be removed when issue is fixed.
-# https://github.com/CircleCI-Public/cimg-base/issues/15
-RUN apt-get update && apt-get install -y software-properties-common && \
-	rm -rf /var/lib/apt/lists/*
 
 RUN add-apt-repository -y ppa:ondrej/php && \
 	apt-get install -y php${PHP_MINOR} && \
