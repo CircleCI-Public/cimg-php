@@ -39,7 +39,7 @@ jobs:
       - run: go version
 ```
 
-In the above example, the CircleCI Go Docker image is used for the primary container.
+In the above example, the CircleCI PHP Docker image is used for the primary container.
 More specifically, the tag `7.3` is used meaning the version of PHP will be PHP v7.3.11.
 You can now use PHP within the steps for this job.
 
@@ -110,7 +110,7 @@ When releasing proper images for CircleCI, this script is run from a CircleCI pi
 
 The individual scripts (above) can be used to create the correct files for an image, and then added to a new git branch, committed, etc.
 A release script is included to make this process easier.
-To make a proper release for this image, let's use the fake Go version of Go v9.99, you would run the following from the repo root:
+To make a proper release for this image, let's use the fake PHP version of PHP v9.99, you would run the following from the repo root:
 
 ```bash
 ./shared/release.sh 9.99
@@ -141,22 +141,22 @@ git add shared
 git commit -m "Updating submodule for foo."
 ```
 
-**parent image** - By design, when changes happen to a parent image, they don't appear in existing Go images.
+**parent image** - By design, when changes happen to a parent image, they don't appear in existing PHP images.
 This is to aid in "determinism" and prevent breaking customer builds.
-New Go images will automatically pick up the changes.
+New PHP images will automatically pick up the changes.
 
-If you *really* want to publish changes from a parent image into the Go image, you have to build a specific image version as if it was a new image.
+If you *really* want to publish changes from a parent image into the PHP image, you have to build a specific image version as if it was a new image.
 This will create a new Dockerfile and once published, a new image.
 
-**Go specific changes** - Editing the `Dockerfile.template` file in this repo is how to modify the Go image specifically.
+**PHP specific changes** - Editing the `Dockerfile.template` file in this repo is how to modify the PHP image specifically.
 Don't forget that to see any of these changes locally, the `gen-dockerfiles.sh` script will need to be run again (see above).
 
 
 ## Contributing
 
-We encourage [issues](https://github.com/CircleCI-Public/cimg-go/issues) to and [pull requests](https://github.com/CircleCI-Public/cimg-go/pulls) against this repository however, in order to value your time, here are some things to consider:
+We encourage [issues](https://github.com/CircleCI-Public/cimg-php/issues) to and [pull requests](https://github.com/CircleCI-Public/cimg-php/pulls) against this repository however, in order to value your time, here are some things to consider:
 
-1. We won't include just anything in this image. In order for us to add a tool within the Go image, it has to be something that is maintained and useful to a large number of Gophers (Go developers). Every tool added makes the image larger and slower for all users so being thorough on what goes in the image will benefit everyone.
+1. We won't include just anything in this image. In order for us to add a tool within the PHP image, it has to be something that is maintained and useful to a large number of people. Every tool added makes the image larger and slower for all users so being thorough on what goes in the image will benefit everyone.
 1. PRs are welcome. If you have a PR that will potentially take a large amount of time to make, it will be better to open an issue to discuss it first to make sure it's something worth investing the time in.
 1. Issues should be to report bugs or request additional/removal of tools in this image. For help with images, please visit [CircleCI Discuss](https://discuss.circleci.com/c/ecosystem/circleci-images).
 
