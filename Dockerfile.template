@@ -20,7 +20,7 @@ RUN apt-get update && apt-get install -y \
 	rm -rf /var/lib/apt/lists/*
 
 # Install the PHP package manager Composer
-ENV COMPOSER_VERSION 1.9.0
+ENV COMPOSER_VERSION 1.9.1
 ENV COMPOSER_SHA a5c698ffe4b8e849a443b120cd5ba38043260d5c4023dbf93e1558871f1f07f58274fc6f4c93bcfd858c6bd0775cd8d1
 ENV COMPOSER_ALLOW_SUPERUSER=1
 
