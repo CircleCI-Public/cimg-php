@@ -1,10 +1,10 @@
 # vim:set ft=dockerfile:
 
-FROM cimg/base:2019.10
+FROM cimg/base:2019.11
 
 LABEL maintainer="CircleCI Community & Partner Engineering Team <community-partner@circleci.com>"
 
-ENV PHP_VERSION 7.2.24
+ENV PHP_VERSION 7.2.25
 ENV PHP_MINOR 7.2
 
 RUN add-apt-repository -y ppa:ondrej/php && \
@@ -20,7 +20,7 @@ RUN apt-get update && apt-get install -y \
 	rm -rf /var/lib/apt/lists/*
 
 # Install the PHP package manager Composer
-ENV COMPOSER_VERSION 1.9.0
+ENV COMPOSER_VERSION 1.9.1
 ENV COMPOSER_SHA a5c698ffe4b8e849a443b120cd5ba38043260d5c4023dbf93e1558871f1f07f58274fc6f4c93bcfd858c6bd0775cd8d1
 ENV COMPOSER_ALLOW_SUPERUSER=1
 
