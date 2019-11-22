@@ -8,7 +8,7 @@ ENV PHP_VERSION %%MAIN_VERSION%%
 ENV PHP_MINOR %%VERSION_MINOR%%
 
 RUN add-apt-repository -y ppa:ondrej/php && \
-	apt-get install -y php${PHP_MINOR} && \
+	apt-get install -y php${PHP_MINOR} php${PHP_MINOR}-dev && \
 	rm -rf /var/lib/apt/lists/*
 
 # Pre-install a few very popular PHP extensions
