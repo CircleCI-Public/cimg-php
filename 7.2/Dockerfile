@@ -4,11 +4,11 @@ FROM cimg/base:2019.11
 
 LABEL maintainer="CircleCI Community & Partner Engineering Team <community-partner@circleci.com>"
 
-ENV PHP_VERSION 7.2.25
+ENV PHP_VERSION 7.2.23
 ENV PHP_MINOR 7.2
 
 RUN add-apt-repository -y ppa:ondrej/php && \
-	apt-get install -y php${PHP_MINOR} && \
+	apt-get install -y php${PHP_MINOR} php${PHP_MINOR}-dev && \
 	rm -rf /var/lib/apt/lists/*
 
 # Pre-install a few very popular PHP extensions
