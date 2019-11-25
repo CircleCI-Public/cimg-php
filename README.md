@@ -1,8 +1,8 @@
 <div align="center">
 	<p>
-		<img alt="CircleCI Logo" src="img/circle-circleci.svg" width="75" />
-		<img alt="Docker Logo" src="img/circle-docker.svg" width="75" />
-		<img alt="PHP Logo" src="img/php-logo.svg" width="75" />
+		<img alt="CircleCI Logo" src="https://raw.github.com/CircleCI-Public/cimg-php/master/img/circle-circleci.svg?sanitize=true" width="75" />
+		<img alt="Docker Logo" src="https://raw.github.com/CircleCI-Public/cimg-php/master/img/circle-docker.svg?sanitize=true" width="75" />
+		<img alt="PHP Logo" src="https://raw.github.com/CircleCI-Public/cimg-php/master/img/circle-php.svg?sanitize=true" width="75" />
 	</p>
 	<h1>CircleCI Convenience Images => PHP</h1>
 	<h3>A Continuous Integration focused PHP Docker image built to run on CircleCI</h3>
@@ -10,8 +10,10 @@
 
 [![CircleCI Build Status](https://circleci.com/gh/CircleCI-Public/cimg-php.svg?style=shield)](https://circleci.com/gh/CircleCI-Public/cimg-php) [![Software License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/CircleCI-Public/cimg-php/master/LICENSE) [![Docker Pulls](https://img.shields.io/docker/pulls/cimg/php)](https://hub.docker.com/r/cimg/php) [![CircleCI Community](https://img.shields.io/badge/community-CircleCI%20Discuss-343434.svg)](https://discuss.circleci.com/c/ecosystem/circleci-images)
 
+***This image is in beta and is designed to supercede the original CircleCI PHP image, `circleci/php`.***
+
 `cimg/php` is a Docker image created by CircleCI with continuous integration builds in mind.
-Each tag contains a complete PHP version and toolchain, the testing wrapper `gotestsum`, and any binaries and tools that are required for builds to complete successfully in a CircleCI environment.
+Each tag contains a complete PHP version and Composer, everything required for builds to complete successfully in a CircleCI environment.
 
 
 ## Table of Contents
@@ -33,20 +35,27 @@ For example:
 jobs:
   build:
     docker:
-      - image: cimg/php:7.3
+      - image: cimg/php:7.3.11
     steps:
       - checkout
-      - run: go version
+      - run: php --version
 ```
 
 In the above example, the CircleCI PHP Docker image is used for the primary container.
-More specifically, the tag `7.3` is used meaning the version of PHP will be PHP v7.3.11.
+More specifically, the tag `7.3.11` is used meaning the version of PHP will be PHP v7.3.11.
 You can now use PHP within the steps for this job.
 
 
 ## How This Image Works
 
-This image contains the PHP programming language and its complete toolchain.
+This image contains the PHP programming language as well as Composer and a few very popular PHP extensions.
+
+### Variants
+
+This image will have a Node.js variant in the future.
+Variant images typically contain the same base software, but with a few additional modifications.
+The Node.js variant is the same PHP image but with Node.js also installed.
+The Node.js variant will be used by appending `-node` to the end of an existing `cimg/php` tag.
 
 ### Tagging Scheme
 
@@ -57,8 +66,12 @@ cimg/php:<php-version>[-variant]
 ```
 
 `<php-version>` - The version of PHP to use.
+This can be a full SemVer point release (such as `7.3.11`) or just the minor release (such as `7.3`).
+If you use the minor release tag, it will automatically point to future patch updates as they are released by the PHP Team.
+For example, the tag `7.3` points to PHP v7.3.11 now, but when the next release comes out, it will point to PHP v7.3.12.
 
 `[-variant]` - Variant tags, if available, can optionally be used.
+Once the Node.js variant is available, it could be used like this: `cimg/php:7.3-node`.
 
 
 ## Development
@@ -95,6 +108,24 @@ Clone the project with the following command so that you populate the submodule:
 git clone --recurse-submodules git@github.com:CircleCI-Public/cimg-php.git
 ```
 
+### Generating Dockerfiles
+
+Dockerfiles can be generated for a specific PHP version using the `gen-dockerfiles.sh` script.
+For example, to generate the Dockerfile for PHP v7.3.11, you would run the following from the root of the repo:
+
+```bash
+./shared/gen-dockerfiles.sh 7.3.11
+```
+
+The generated Dockerfile will be located at `./7.3/Dockefile`.
+To build this image locally and try it out, you can run the following:
+
+```bash
+cd 7.3
+docker build -t test/php:7.3.11 .
+docker run -it test/go:7.3.11 bash
+```
+
 ### Building the Dockerfiles
 
 To build the Docker images locally as this repository does, you'll want to run the `build-images.sh` script:
@@ -117,6 +148,8 @@ To make a proper release for this image, let's use the fake PHP version of PHP v
 ```
 
 This will automatically create a new Git branch, generate the Dockerfile(s), stage the changes, commit them, and push them to GitHub.
+The commit message will end with the string `[release]`.
+This string is used by CircleCI to know when to push images to Docker Hub.
 All that would need to be done after that is:
 
 - wait for build to pass on CircleCI
@@ -156,7 +189,7 @@ Don't forget that to see any of these changes locally, the `gen-dockerfiles.sh` 
 
 We encourage [issues](https://github.com/CircleCI-Public/cimg-php/issues) to and [pull requests](https://github.com/CircleCI-Public/cimg-php/pulls) against this repository however, in order to value your time, here are some things to consider:
 
-1. We won't include just anything in this image. In order for us to add a tool within the PHP image, it has to be something that is maintained and useful to a large number of people. Every tool added makes the image larger and slower for all users so being thorough on what goes in the image will benefit everyone.
+1. We won't include just anything in this image. In order for us to add a tool within the PHP image, it has to be something that is maintained and useful to a large number of PHP users. Every tool added makes the image larger and slower for all users so being thorough on what goes in the image will benefit everyone.
 1. PRs are welcome. If you have a PR that will potentially take a large amount of time to make, it will be better to open an issue to discuss it first to make sure it's something worth investing the time in.
 1. Issues should be to report bugs or request additional/removal of tools in this image. For help with images, please visit [CircleCI Discuss](https://discuss.circleci.com/c/ecosystem/circleci-images).
 
