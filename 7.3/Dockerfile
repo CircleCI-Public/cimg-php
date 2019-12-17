@@ -4,7 +4,7 @@ FROM cimg/base:2019.11
 
 LABEL maintainer="CircleCI Community & Partner Engineering Team <community-partner@circleci.com>"
 
-ENV PHP_VERSION 7.3.12
+ENV PHP_VERSION 7.3.13
 ENV PHP_MINOR 7.3
 
 RUN add-apt-repository -y ppa:ondrej/php && \
@@ -21,7 +21,7 @@ RUN apt-get update && apt-get install -y \
 
 # Install the PHP package manager Composer
 ENV COMPOSER_VERSION 1.9.1
-ENV COMPOSER_SHA a5c698ffe4b8e849a443b120cd5ba38043260d5c4023dbf93e1558871f1f07f58274fc6f4c93bcfd858c6bd0775cd8d1
+ENV COMPOSER_SHA baf1608c33254d00611ac1705c1d9958c817a1a33bce370c0595974b342601bd80b92a3f46067da89e3b06bff421f182
 ENV COMPOSER_ALLOW_SUPERUSER=1
 
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
