@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-docker build --file 7.4/Dockerfile -t cimg/php:7.4.2  -t cimg/php:7.4 .
+docker build --file 7.2/Dockerfile -t cimg/php:7.2.27  -t cimg/php:7.2 .
