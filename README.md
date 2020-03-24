@@ -52,10 +52,10 @@ This image contains the PHP programming language as well as Composer and a few v
 
 ### Variants
 
-This image will have a Node.js variant in the future.
+This image has a Node.js variant.
 Variant images typically contain the same base software, but with a few additional modifications.
 The Node.js variant is the same PHP image but with Node.js also installed.
-The Node.js variant will be used by appending `-node` to the end of an existing `cimg/php` tag.
+The Node.js variant can be used by appending `-node` to the end of an existing `cimg/php` tag.
 
 ### Tagging Scheme
 
@@ -71,7 +71,7 @@ If you use the minor release tag, it will automatically point to future patch up
 For example, the tag `7.3` points to PHP v7.3.11 now, but when the next release comes out, it will point to PHP v7.3.12.
 
 `[-variant]` - Variant tags, if available, can optionally be used.
-Once the Node.js variant is available, it could be used like this: `cimg/php:7.3-node`.
+For example, the Node.js variant could be used like this: `cimg/php:7.3-node`.
 
 
 ## Development
