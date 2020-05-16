@@ -16,7 +16,8 @@ RUN sudo apt-get update && sudo apt-get install -y \
 		php$PHP_MINOR-curl \
 		php$PHP_MINOR-gd \
 		php$PHP_MINOR-json \
-		php$PHP_MINOR-mysql && \
+		php$PHP_MINOR-mysql \
+		php$PHP_MINOR-xml && \
 	sudo rm -rf /var/lib/apt/lists/*
 
 # Install the PHP package manager Composer
