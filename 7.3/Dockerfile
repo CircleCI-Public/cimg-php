@@ -1,6 +1,6 @@
 # vim:set ft=dockerfile:
 
-FROM cimg/base:2020.05
+FROM cimg/base:2020.06
 
 LABEL maintainer="Community & Partner Engineering Team <community-partner@circleci.com>"
 
@@ -16,14 +16,19 @@ RUN sudo apt-get update && sudo apt-get install -y \
 		php$PHP_MINOR-curl \
 		php$PHP_MINOR-gd \
 		php$PHP_MINOR-json \
-		php$PHP_MINOR-mysql && \
+		php$PHP_MINOR-mbstring \
+		php$PHP_MINOR-mysql \
+		php$PHP_MINOR-xml \
+		php$PHP_MINOR-zip && \
 	sudo rm -rf /var/lib/apt/lists/*
 
 # Install the PHP package manager Composer
-ENV COMPOSER_VERSION 1.10.6
+ENV COMPOSER_VERSION 1.10.7
 ENV COMPOSER_SHA e0012edf3e80b6978849f5eff0d4b4e4c79ff1609dd1e613307e16318854d24ae64f26d17af3ef0bf7cfb710ca74755a
 
 RUN sudo php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
 	sudo php -r "if (hash_file('sha384', 'composer-setup.php') === '${COMPOSER_SHA}') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;" && \
 	sudo php composer-setup.php --version=$COMPOSER_VERSION --install-dir=/usr/local/bin --filename=composer && \
-	sudo php -r "unlink('composer-setup.php');"
+	sudo php -r "unlink('composer-setup.php');" && \
+	sudo chown -R circleci:circleci ~/.composer
+ENV PATH /home/circleci/.composer/vendor/bin:$PATH
