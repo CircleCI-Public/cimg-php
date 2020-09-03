@@ -30,5 +30,6 @@ RUN sudo php -r "copy('https://getcomposer.org/installer', 'composer-setup.php')
 	sudo php -r "if (hash_file('sha384', 'composer-setup.php') === '${COMPOSER_SHA}') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;" && \
 	sudo php composer-setup.php --version=$COMPOSER_VERSION --install-dir=/usr/local/bin --filename=composer && \
 	sudo php -r "unlink('composer-setup.php');" && \
+	composer --version && \
 	sudo chown -R circleci:circleci ~/.composer
 ENV PATH /home/circleci/.composer/vendor/bin:$PATH
