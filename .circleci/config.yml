@@ -4,7 +4,7 @@ workflows:
   main:
     jobs:
       - build:
-          context: orb-publishing
+          context: cimg-publishing
 
 jobs:
   build:
