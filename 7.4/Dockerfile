@@ -4,7 +4,7 @@ FROM cimg/base:2020.09
 
 LABEL maintainer="Community & Partner Engineering Team <community-partner@circleci.com>"
 
-ENV PHP_VERSION 7.4.10
+ENV PHP_VERSION 7.4.11
 ENV PHP_MINOR 7.4
 
 RUN sudo add-apt-repository -y ppa:ondrej/php && \
@@ -23,8 +23,8 @@ RUN sudo apt-get update && sudo apt-get install -y \
 	sudo rm -rf /var/lib/apt/lists/*
 
 # Install the PHP package manager Composer
-ENV COMPOSER_VERSION 1.10.10
-ENV COMPOSER_SHA 8a6138e2a05a8c28539c9f0fb361159823655d7ad2deecb371b04a83966c61223adc522b0189079e3e9e277cd72b8897
+ENV COMPOSER_VERSION 1.10.13
+ENV COMPOSER_SHA 795f976fe0ebd8b75f26a6dd68f78fd3453ce79f32ecb33e7fd087d39bfeb978342fb73ac986cd4f54edd0dc902601dc
 
 RUN sudo php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
 	sudo php -r "if (hash_file('sha384', 'composer-setup.php') === '${COMPOSER_SHA}') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;" && \
