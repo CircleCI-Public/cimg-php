@@ -50,6 +50,17 @@ You can now use PHP within the steps for this job.
 
 This image contains the PHP programming language as well as Composer and a few very popular PHP extensions.
 
+### PHP Extensions
+
+This image is based on Ubuntu.
+This means you can install additional PHP extensions as you would on an Ubuntu-based server.
+Many PHP extension Apt packages are available to install as a convenience.
+For example, to install the PHP BCrypt extension (already pre-installed), you would run the following in your CircleCI config:
+
+```bash
+sudo apt-get update && sudo apt-get install -y php-bcrypt
+```
+
 ### Variants
 
 Variant images typically contain the same base software, but with a few additional modifications.
