@@ -10,7 +10,7 @@
 
 [![CircleCI Build Status](https://circleci.com/gh/CircleCI-Public/cimg-php.svg?style=shield)](https://circleci.com/gh/CircleCI-Public/cimg-php) [![Software License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/CircleCI-Public/cimg-php/master/LICENSE) [![Docker Pulls](https://img.shields.io/docker/pulls/cimg/php)](https://hub.docker.com/r/cimg/php) [![CircleCI Community](https://img.shields.io/badge/community-CircleCI%20Discuss-343434.svg)](https://discuss.circleci.com/c/ecosystem/circleci-images)
 
-***This image is in beta and is designed to supercede the original CircleCI PHP image, `circleci/php`.***
+***This image is designed to supercede the legacy CircleCI PHP image, `circleci/php`.***
 
 `cimg/php` is a Docker image created by CircleCI with continuous integration builds in mind.
 Each tag contains a complete PHP version and Composer, everything required for builds to complete successfully in a CircleCI environment.
@@ -35,14 +35,14 @@ For example:
 jobs:
   build:
     docker:
-      - image: cimg/php:7.3.11
+      - image: cimg/php:7.4.14
     steps:
       - checkout
       - run: php --version
 ```
 
 In the above example, the CircleCI PHP Docker image is used for the primary container.
-More specifically, the tag `7.3.11` is used meaning the version of PHP will be PHP v7.3.11.
+More specifically, the tag `7.4.12` is used meaning the version of PHP will be PHP v7.4.12.
 You can now use PHP within the steps for this job.
 
 
@@ -61,6 +61,15 @@ For example, to install the PHP BCrypt extension (already pre-installed), you wo
 sudo apt-get update && sudo apt-get install -y php-bcrypt
 ```
 
+### Composer v2
+
+This image includes Composer v2 for tags built on November 2020 and after.
+For anyone who can't yet use this and needs to use Composer v1 instead, you can run the following at the beginning of your build:
+
+```bash
+- run : sudo composer self-update --1
+```
+
 ### Variants
 
 Variant images typically contain the same base software, but with a few additional modifications.
@@ -74,7 +83,7 @@ The Node.js variant can be used by appending `-node` to the end of an existing `
 jobs:
   build:
     docker:
-      - image: cimg/php:7.4-node
+      - image: cimg/php:7.4.14-node
     steps:
       - checkout
       - run: php --version
@@ -96,7 +105,7 @@ orbs:
 jobs:
   build:
     docker:
-      - image: cimg/php:7.4-browsers
+      - image: cimg/php:7.4.14-browsers
     steps:
       - browser-tools/install-browsers
       - checkout
@@ -122,15 +131,6 @@ For example, the tag `7.3` points to PHP v7.3.11 now, but when the next release 
 
 `[-variant]` - Variant tags, if available, can optionally be used.
 For example, the Node.js variant could be used like this: `cimg/php:7.3-node`.
-
-### Composer v2
-
-This image includes Composer v2 for tags built on November 2020 and after.
-For anyone who can't yet use this and needs to use Composer v1 instead, you can run the following at the beginning of your build:
-
-```bash
-- run : sudo composer self-update --1
-```
 
 
 ## Development
