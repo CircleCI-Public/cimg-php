@@ -112,6 +112,15 @@ For example, the tag `7.3` points to PHP v7.3.11 now, but when the next release 
 `[-variant]` - Variant tags, if available, can optionally be used.
 For example, the Node.js variant could be used like this: `cimg/php:7.3-node`.
 
+### Composer v2
+
+This image includes Composer v2 for tags built on November 2020 and after.
+For anyone who can't yet use this and needs to use Composer v1 instead, you can run the following at the beginning of your build:
+
+```bash
+- run : sudo composer self-update --1
+```
+
 
 ## Development
 
