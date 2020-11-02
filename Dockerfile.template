@@ -26,7 +26,7 @@ RUN sudo apt-get update && sudo apt-get install -y \
 	sudo rm -rf /var/lib/apt/lists/*
 
 # Install the PHP package manager Composer
-ENV COMPOSER_VERSION 2.0.2
+ENV COMPOSER_VERSION 2.0.4
 ENV COMPOSER_SHA c31c1e292ad7be5f49291169c0ac8f683499edddcfd4e42232982d0fd193004208a58ff6f353fde0012d35fdd72bc394
 
 RUN sudo php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
