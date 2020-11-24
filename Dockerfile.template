@@ -34,4 +34,4 @@ RUN sudo php -r "copy('https://getcomposer.org/installer', 'composer-setup.php')
 	sudo php composer-setup.php --version=$COMPOSER_VERSION --install-dir=/usr/local/bin --filename=composer && \
 	sudo php -r "unlink('composer-setup.php');" && \
 	composer --version
-ENV PATH /home/circleci/.composer/vendor/bin:$PATH
+ENV PATH /home/circleci/.config/composer/vendor/bin:/home/circleci/.composer/vendor/bin:$PATH
