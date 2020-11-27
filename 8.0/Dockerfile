@@ -1,11 +1,11 @@
 # vim:set ft=dockerfile:
 
-FROM cimg/%%PARENT%%:2020.09
+FROM cimg/base:2020.09
 
 LABEL maintainer="Community & Partner Engineering Team <community-partner@circleci.com>"
 
-ENV PHP_VERSION %%MAIN_VERSION%%
-ENV PHP_MINOR %%VERSION_MINOR%%
+ENV PHP_VERSION 8.0.0
+ENV PHP_MINOR 8.0
 
 RUN sudo add-apt-repository -y ppa:ondrej/php && \
 	sudo apt-get install -y php${PHP_MINOR} php${PHP_MINOR}-dev && \
@@ -23,7 +23,7 @@ RUN sudo apt-get update && sudo apt-get install -y \
 		php$PHP_MINOR-zip \
 	&& \
 	# Only install the JSON extension in PHP 5 and 7
-	if (( %%VERSION_MAJOR%% <= 7 )); then \
+	if (( 8 <= 7 )); then \
 		sudo apt-get install -y php$PHP_MINOR-json; \
 	fi && \
 	sudo rm -rf /var/lib/apt/lists/*
