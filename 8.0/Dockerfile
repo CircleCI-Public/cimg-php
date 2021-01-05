@@ -1,10 +1,10 @@
 # vim:set ft=dockerfile:
 
-FROM cimg/base:2020.09
+FROM cimg/base:2020.12
 
 LABEL maintainer="Community & Partner Engineering Team <community-partner@circleci.com>"
 
-ENV PHP_VERSION 8.0.0
+ENV PHP_VERSION 8.0.1
 ENV PHP_MINOR 8.0
 
 RUN sudo add-apt-repository -y ppa:ondrej/php && \
@@ -19,6 +19,7 @@ RUN sudo apt-get update && sudo apt-get install -y \
 		php$PHP_MINOR-mbstring \
 		php$PHP_MINOR-mysql \
 		php$PHP_MINOR-pgsql \
+		php$PHP_MINOR-phpdbg \
 		php$PHP_MINOR-xml \
 		php$PHP_MINOR-zip \
 	&& \
@@ -29,7 +30,7 @@ RUN sudo apt-get update && sudo apt-get install -y \
 	sudo rm -rf /var/lib/apt/lists/*
 
 # Install the PHP package manager Composer
-ENV COMPOSER_VERSION 2.0.7
+ENV COMPOSER_VERSION 2.0.8
 RUN sudo php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
 	sudo php composer-setup.php --version=$COMPOSER_VERSION --install-dir=/usr/local/bin --filename=composer && \
 	sudo php -r "unlink('composer-setup.php');" && \
