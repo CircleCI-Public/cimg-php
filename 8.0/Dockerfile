@@ -4,7 +4,7 @@ FROM cimg/base:2020.12
 
 LABEL maintainer="Community & Partner Engineering Team <community-partner@circleci.com>"
 
-ENV PHP_VERSION 8.0.1
+ENV PHP_VERSION 8.0.2
 ENV PHP_MINOR 8.0
 
 RUN sudo add-apt-repository -y ppa:ondrej/php && \
