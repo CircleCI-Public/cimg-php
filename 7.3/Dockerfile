@@ -4,7 +4,7 @@ FROM cimg/base:2021.07
 
 LABEL maintainer="Community & Partner Engineering Team <community-partner@circleci.com>"
 
-ENV PHP_VERSION 7.3.31
+ENV PHP_VERSION 7.3.32
 ENV PHP_MINOR 7.3
 
 RUN sudo add-apt-repository -y ppa:ondrej/php && \
@@ -27,7 +27,8 @@ RUN sudo apt-get update && sudo apt-get install -y \
 	if (( 7 <= 7 )); then \
 		sudo apt-get install -y php$PHP_MINOR-json; \
 	fi && \
-	sudo rm -rf /var/lib/apt/lists/*
+	sudo rm -rf /var/lib/apt/lists/* && \
+	php --version | grep "${PHP_VERSION}" || echo "Error: PHP version installed is not correct." && exit 1
 
 # Install the PHP package manager Composer
 ENV COMPOSER_VERSION 2.1.7
