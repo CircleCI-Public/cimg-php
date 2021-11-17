@@ -1,36 +1,55 @@
 # vim:set ft=dockerfile:
 
-FROM cimg/base:2021.07
+FROM cimg/base:2021.10
 
 LABEL maintainer="Community & Partner Engineering Team <community-partner@circleci.com>"
 
-ENV PHP_VERSION 8.0.11
+ENV PHP_VERSION 8.0.12
 ENV PHP_MINOR 8.0
 
-RUN sudo add-apt-repository -y ppa:ondrej/php && \
-	sudo apt-get install -y php${PHP_MINOR} php${PHP_MINOR}-dev && \
-	sudo rm -rf /var/lib/apt/lists/*
-
-# Pre-install a few very popular PHP extensions
+# Install dependencies
 RUN sudo apt-get update && sudo apt-get install -y \
-		php$PHP_MINOR-bcmath \
-		php$PHP_MINOR-curl \
-		php$PHP_MINOR-gd \
-		php$PHP_MINOR-mbstring \
-		php$PHP_MINOR-mysql \
-		php$PHP_MINOR-pgsql \
-		php$PHP_MINOR-phpdbg \
-		php$PHP_MINOR-xml \
-		php$PHP_MINOR-zip \
+		autoconf \
+		bison \
+		build-essential \
+		libcurl4-openssl-dev \
+		libonig-dev \
+		libreadline-dev \
+		libsqlite3-dev \
+		libssl-dev \
+		libtool \
+		libxml2-dev \
+		re2c \
+		zlib1g-dev \
 	&& \
-	# Only install the JSON extension in PHP 5 and 7
-	if (( 8 <= 7 )); then \
-		sudo apt-get install -y php$PHP_MINOR-json; \
-	fi && \
-	sudo rm -rf /var/lib/apt/lists/*
+	sudo rm -rf /var/lib/apt/lists/* && \
+
+	curl -sSL "https://www.php.net/distributions/php-${PHP_VERSION}.tar.gz" | tar -xz && \
+	cd "php-${PHP_VERSION}" && \
+	./buildconf && \
+	./configure \
+		--enable-bcmath \
+		--enable-mbstring \
+		--enable-phpdbg \
+		--enable-zip \
+		--with-curl \
+		--with-gd \
+		--with-mysqli \
+		--with-pdo-mysql \
+		--with-pdo-pgsql \
+		--with-pgsql \
+		--with-openssl \
+		--with-readline \
+		--with-zlib \
+	&& \
+	make -j $(nproc) && \
+	sudo make install && \
+	php --version | grep "${PHP_VERSION}" || ( echo "Error: PHP version installed is not correct." && exit 1 ) && \
+	cd .. && \
+	rm -r php-${PHP_VERSION}
 
 # Install the PHP package manager Composer
-ENV COMPOSER_VERSION 2.1.7
+ENV COMPOSER_VERSION 2.1.12
 RUN sudo php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
 	sudo php composer-setup.php --version=$COMPOSER_VERSION --install-dir=/usr/local/bin --filename=composer && \
 	sudo php -r "unlink('composer-setup.php');" && \
