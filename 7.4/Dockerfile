@@ -18,6 +18,7 @@ RUN sudo apt-get update && sudo apt-get install -y \
 		libonig-dev \
 		libpng-dev \
 		libreadline-dev \
+		libsodium-dev \
 		libsqlite3-dev \
 		libssl-dev \
 		libtool \
@@ -39,6 +40,7 @@ RUN sudo apt-get update && sudo apt-get install -y \
 		--enable-gd \
 		--enable-intl \
 		--enable-mbstring \
+		--enable-pcntl \
 		--enable-phpdbg \
 		--enable-sockets \
 		--enable-exif \
@@ -55,6 +57,7 @@ RUN sudo apt-get update && sudo apt-get install -y \
 		--with-pgsql \
 		--with-openssl \
 		--with-readline \
+		--with-sodium \
 		--with-webp \
 		--with-xpm \
 		--with-zip \
@@ -66,7 +69,7 @@ RUN sudo apt-get update && sudo apt-get install -y \
 	rm -r php-${PHP_VERSION} && \
 	sudo mkdir -p /etc/php.d && \
 	echo 'memory_limit = -1' | sudo tee -a /etc/php.d/circleci.ini && \
-	pear config-set php_init /etc/php.d/circleci.ini && \
+	#sudo pear config-set php_init /etc/php.d/circleci.ini && \
 
 	# Check things are as they should be
 	php --version | grep "${PHP_VERSION}" || ( echo "Error: PHP version installed is not correct." && exit 1 ) && \
