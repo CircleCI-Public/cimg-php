@@ -35,14 +35,14 @@ For example:
 jobs:
   build:
     docker:
-      - image: cimg/php:7.4.14
+      - image: cimg/php:7.4.26
     steps:
       - checkout
       - run: php --version
 ```
 
 In the above example, the CircleCI PHP Docker image is used for the primary container.
-More specifically, the tag `7.4.12` is used meaning the version of PHP will be PHP v7.4.12.
+More specifically, the tag `7.4.26` is used meaning the version of PHP will be PHP v7.4.26.
 You can now use PHP within the steps for this job.
 
 
@@ -52,14 +52,16 @@ This image contains the PHP programming language as well as Composer and a few v
 
 ### PHP Extensions
 
-This image is based on Ubuntu.
-This means you can install additional PHP extensions as you would on an Ubuntu-based server.
-Many PHP extension Apt packages are available to install as a convenience.
-For example, to install the PHP BCrypt extension (already pre-installed), you would run the following in your CircleCI config:
+This image contains [PEAR](https://pear.php.net/) and [PECL](https://pecl.php.net/).
+These tools can be used to install various PHP extensions and utilities.
+For example, to install pcov, the following command can be run:
 
 ```bash
-sudo apt-get update && sudo apt-get install -y php-bcrypt
+sudo pecl install pcov
 ```
+
+Older versions of this image suggested installing extensions via `apt-get`.
+This is no longer the suggested route unless you are providing your own source of packages and know exactly what you are doing.
 
 ### Composer v2
 
@@ -83,7 +85,7 @@ The Node.js variant can be used by appending `-node` to the end of an existing `
 jobs:
   build:
     docker:
-      - image: cimg/php:7.4.14-node
+      - image: cimg/php:7.4.26-node
     steps:
       - checkout
       - run: php --version
@@ -103,7 +105,7 @@ orbs:
 jobs:
   build:
     docker:
-      - image: cimg/php:7.4.14-browsers
+      - image: cimg/php:7.4.26-browsers
     steps:
       - browser-tools/install-browser-tools
       - checkout
@@ -123,12 +125,12 @@ cimg/php:<php-version>[-variant]
 ```
 
 `<php-version>` - The version of PHP to use.
-This can be a full SemVer point release (such as `7.3.11`) or just the minor release (such as `7.3`).
+This can be a full SemVer point release (such as `7.4.25`) or just the minor release (such as `7.4`).
 If you use the minor release tag, it will automatically point to future patch updates as they are released by the PHP Team.
-For example, the tag `7.3` points to PHP v7.3.11 now, but when the next release comes out, it will point to PHP v7.3.12.
+For example, the tag `7.4` points to PHP v7.4.25 now, but when the next release comes out, it will point to PHP v7.4.26.
 
 `[-variant]` - Variant tags, if available, can optionally be used.
-For example, the Node.js variant could be used like this: `cimg/php:7.3-node`.
+For example, the Node.js variant could be used like this: `cimg/php:7.4-node`.
 
 
 ## Development
@@ -168,10 +170,10 @@ git clone --recurse-submodules git@github.com:CircleCI-Public/cimg-php.git
 ### Generating Dockerfiles
 
 Dockerfiles can be generated for a specific PHP version using the `gen-dockerfiles.sh` script.
-For example, to generate the Dockerfile for PHP v7.3.11, you would run the following from the root of the repo:
+For example, to generate the Dockerfile for PHP v7.4.26, you would run the following from the root of the repo:
 
 ```bash
-./shared/gen-dockerfiles.sh 7.3.11
+./shared/gen-dockerfiles.sh 7.4.26
 ```
 
 The generated Dockerfile will be located at `./7.3/Dockefile`.
