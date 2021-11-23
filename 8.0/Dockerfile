@@ -45,7 +45,6 @@ RUN sudo apt-get update && sudo apt-get install -y \
 		--enable-sockets \
 		--enable-exif \
 		--enable-zip \
-		--enable-soap \
 		--with-config-file-scan-dir=/etc/php.d \
 		--with-curl \
 		--with-freetype \
