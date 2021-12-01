@@ -9,3 +9,6 @@ docker build --file 7.4/browsers/Dockerfile -t cimg/php:7.4.26-browsers  -t cimg
 docker build --file 8.0/Dockerfile -t cimg/php:8.0.13  -t cimg/php:8.0 .
 docker build --file 8.0/node/Dockerfile -t cimg/php:8.0.13-node  -t cimg/php:8.0-node .
 docker build --file 8.0/browsers/Dockerfile -t cimg/php:8.0.13-browsers  -t cimg/php:8.0-browsers .
+docker build --file 8.1/Dockerfile -t cimg/php:8.1.0  -t cimg/php:8.1 .
+docker build --file 8.1/node/Dockerfile -t cimg/php:8.1.0-node  -t cimg/php:8.1-node .
+docker build --file 8.1/browsers/Dockerfile -t cimg/php:8.1.0-browsers  -t cimg/php:8.1-browsers .

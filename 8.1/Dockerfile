@@ -1,11 +1,11 @@
 # vim:set ft=dockerfile:
 
-FROM cimg/%%PARENT%%:2021.11
+FROM cimg/base:2021.11
 
 LABEL maintainer="Community & Partner Engineering Team <community-partner@circleci.com>"
 
-ENV PHP_VERSION %%VERSION_FULL%%
-ENV PHP_MINOR %%VERSION_MINOR%%
+ENV PHP_VERSION 8.1.0
+ENV PHP_MINOR 8.1
 
 # Install dependencies
 RUN sudo apt-get update && sudo apt-get install -y \
