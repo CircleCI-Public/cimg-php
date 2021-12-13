@@ -176,13 +176,13 @@ For example, to generate the Dockerfile for PHP v7.4.26, you would run the follo
 ./shared/gen-dockerfiles.sh 7.4.26
 ```
 
-The generated Dockerfile will be located at `./7.3/Dockefile`.
+The generated Dockerfile will be located at `./7.4/Dockefile`.
 To build this image locally and try it out, you can run the following:
 
 ```bash
-cd 7.3
-docker build -t test/php:7.3.11 .
-docker run -it test/go:7.3.11 bash
+cd 7.4
+docker build -t test/php:7.4.26 .
+docker run -it test/php:7.4.26 bash
 ```
 
 ### Building the Dockerfiles
