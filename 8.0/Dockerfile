@@ -1,10 +1,10 @@
 # vim:set ft=dockerfile:
 
-FROM cimg/base:2021.10
+FROM cimg/base:2022.01
 
 LABEL maintainer="Community & Partner Engineering Team <community-partner@circleci.com>"
 
-ENV PHP_VERSION 8.0.14
+ENV PHP_VERSION 8.0.15
 ENV PHP_MINOR 8.0
 
 # Install dependencies
