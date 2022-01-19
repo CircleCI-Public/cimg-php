@@ -1,10 +1,11 @@
 # vim:set ft=dockerfile:
 
-FROM cimg/base:2021.10
+# Do not edit individual Dockerfiles manually. Instead, please make changes to the Dockerfile.template, which will be used by the build script to generate Dockerfiles.
+FROM cimg/base:2022.01
 
 LABEL maintainer="Community & Partner Engineering Team <community-partner@circleci.com>"
 
-ENV PHP_VERSION 8.1.1
+ENV PHP_VERSION 8.1.2
 ENV PHP_MINOR 8.1
 
 # Install dependencies
