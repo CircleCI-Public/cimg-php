@@ -8,7 +8,7 @@
 	<h3>A Continuous Integration focused PHP Docker image built to run on CircleCI</h3>
 </div>
 
-[![CircleCI Build Status](https://circleci.com/gh/CircleCI-Public/cimg-php.svg?style=shield)](https://circleci.com/gh/CircleCI-Public/cimg-php) [![Software License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/CircleCI-Public/cimg-php/main/LICENSE) [![Docker Pulls](https://img.shields.io/docker/pulls/cimg/php)](https://hub.docker.com/r/cimg/php) [![CircleCI Community](https://img.shields.io/badge/community-CircleCI%20Discuss-343434.svg)](https://discuss.circleci.com/c/ecosystem/circleci-images)
+[![CircleCI Build Status](https://circleci.com/gh/CircleCI-Public/cimg-php.svg?style=shield)](https://circleci.com/gh/CircleCI-Public/cimg-php) [![Software License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/CircleCI-Public/cimg-php/main/LICENSE) [![Docker Pulls](https://img.shields.io/docker/pulls/cimg/php)](https://hub.docker.com/r/cimg/php) [![CircleCI Community](https://img.shields.io/badge/community-CircleCI%20Discuss-343434.svg)](https://discuss.circleci.com/c/ecosystem/circleci-images) [![Repository](https://img.shields.io/badge/github-README-brightgreen)](https://github.com/CircleCI-Public/cimg-php)
 
 ***This image is designed to supercede the legacy CircleCI PHP image, `circleci/php`.***
 
