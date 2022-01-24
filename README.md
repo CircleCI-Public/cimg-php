@@ -68,8 +68,8 @@ This is no longer the suggested route unless you are providing your own source o
 This image includes Composer v2 for tags built on November 2020 and after.
 For anyone who can't yet use this and needs to use Composer v1 instead, you can run the following at the beginning of your build:
 
-```bash
-- run : sudo composer self-update --1
+```yaml
+- run: sudo composer self-update --1
 ```
 
 ### Variants
