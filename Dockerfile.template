@@ -32,7 +32,7 @@ RUN sudo apt-get update && sudo apt-get install -y \
 	&& \
 	sudo rm -rf /var/lib/apt/lists/* && \
 
-	curl -sSL "https://github.com/php/php-src/archive/refs/tags/${PHP_VERSION}.tar.gz" | tar -xz && \
+	curl -sSL "https://github.com/php/php-src/archive/refs/tags/php-${PHP_VERSION}.tar.gz" | tar -xz && \
 	cd "php-${PHP_VERSION}" && \
 	./buildconf && \
 	./configure \
