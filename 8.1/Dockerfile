@@ -5,7 +5,7 @@ FROM cimg/base:2022.01
 
 LABEL maintainer="Community & Partner Engineering Team <community-partner@circleci.com>"
 
-ENV PHP_VERSION 8.1.2
+ENV PHP_VERSION 8.1.4
 ENV PHP_MINOR 8.1
 
 # Install dependencies
@@ -32,9 +32,9 @@ RUN sudo apt-get update && sudo apt-get install -y \
 	&& \
 	sudo rm -rf /var/lib/apt/lists/* && \
 
-	curl -sSL "https://www.php.net/distributions/php-${PHP_VERSION}.tar.gz" | tar -xz && \
-	cd "php-${PHP_VERSION}" && \
-	./buildconf && \
+	curl -sSL "https://github.com/php/php-src/archive/refs/tags/php-${PHP_VERSION}.tar.gz" | tar -xz && \
+	cd "php-src-php-${PHP_VERSION}" && \
+	./buildconf --force && \
 	./configure \
 		--enable-bcmath \
 		--enable-fpm \
@@ -44,6 +44,8 @@ RUN sudo apt-get update && sudo apt-get install -y \
 		--enable-pcntl \
 		--enable-phpdbg \
 		--enable-sockets \
+		--enable-calendar \
+		--enable-ftp \
 		--enable-exif \
 		--enable-zip \
 		--enable-soap \
@@ -68,7 +70,7 @@ RUN sudo apt-get update && sudo apt-get install -y \
 	make -j $(nproc) && \
 	sudo make install && \
 	cd .. && \
-	rm -r php-${PHP_VERSION} && \
+	rm -r php-src-php-${PHP_VERSION} && \
 	sudo mkdir -p /etc/php.d && \
 	echo 'memory_limit = -1' | sudo tee -a /etc/php.d/circleci.ini && \
 	sudo pear config-set php_ini /etc/php.d/circleci.ini && \
