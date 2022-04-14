@@ -10,7 +10,6 @@ workflows:
       # - build:
       #     context: cimg-publishing
       - cimg-orb/build-and-deploy:
-          image: cimg/base:current
           context: cimg-publishing
 
 # jobs:
