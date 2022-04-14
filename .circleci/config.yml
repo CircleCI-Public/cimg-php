@@ -7,8 +7,8 @@ orbs:
 workflows:
   main:
     jobs:
-      - build:
-          context: cimg-publishing
+      # - build:
+      #     context: cimg-publishing
       - cimg-orb/build-and-dpeloy:
           image: cimg/php
 
