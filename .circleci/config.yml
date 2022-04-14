@@ -10,7 +10,7 @@ workflows:
       # - build:
       #     context: cimg-publishing
       - cimg-orb/build-and-deploy:
-          image: cimg/php
+          image: cimg/php:8.1.5
 
 # jobs:
 #   build:
