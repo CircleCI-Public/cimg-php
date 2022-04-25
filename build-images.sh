@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Do not edit by hand; please use build scripts/templates to make changes
 
-docker build --file 8.0/Dockerfile -t cimg/php:8.0.18  -t cimg/php:8.0 .
-docker build --file 8.0/node/Dockerfile -t cimg/php:8.0.18-node  -t cimg/php:8.0-node .
-docker build --file 8.0/browsers/Dockerfile -t cimg/php:8.0.18-browsers  -t cimg/php:8.0-browsers .
+docker build --file 7.4/Dockerfile -t cimg/php:7.4.29  -t cimg/php:7.4 .
+docker build --file 7.4/node/Dockerfile -t cimg/php:7.4.29-node  -t cimg/php:7.4-node .
+docker build --file 7.4/browsers/Dockerfile -t cimg/php:7.4.29-browsers  -t cimg/php:7.4-browsers .
