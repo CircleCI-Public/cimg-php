@@ -87,10 +87,8 @@ for module in $modules; do
 	if readelf --wide --syms "$moduleFile" | grep -q ' zend_extension_entry$'; then
 		# https://wiki.php.net/internals/extensions#loading_zend_extensions
 		line="zend_extension=$module"
-    echo "zend_extension=$module" >> /etc/php.d/circleci.ini
 	else
 		line="extension=$module"
-    echo "extension=$module" >> /etc/php.d/circleci.ini
 	fi
 
 	ext="$(basename "$module")"

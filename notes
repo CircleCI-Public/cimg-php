@@ -24,3 +24,7 @@ install-php-extensions:
 3603-3604
 <!-- # cd /usr/src/php/ext/odbc
 cd /usr/local/lib/php/extensions/odbc -->
+
+since the directories are not the same as the default docker image from php, i had to change some of the directories. i am able to download with the command e.g `sudo install-php-extensions xdebug`, but once the download is complete, a couple things happen: i get the error saying there is a missing operand, and the next steps in mlocati's script do not execute for some reason, saying that the PHP_INI_DIR, a variable that is defined in the dockerfile and also can be echoed.
+
+when I checked the extensions folder at `/usr/local/lib/php/extensions/no-debug-non-zts-20210902`, i can see that the .so files are downloaded and exist. however, i am unable to unpack them. Lastly, there are quite a few times conf.d comes up as well as ini files. While I can't find conf.d anywhere in cimg-php, i was able to check using php -i and php -m to confirm that the ini file we ultimately are using is circleci.ini. however, i don't believe other ini files exist
