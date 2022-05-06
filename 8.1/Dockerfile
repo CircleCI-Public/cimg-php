@@ -7,6 +7,7 @@ LABEL maintainer="Community & Partner Engineering Team <community-partner@circle
 
 ENV PHP_VERSION 8.1.5
 ENV PHP_MINOR 8.1
+ENV PHP_INI_DIR /etc/php.d/circleci.ini
 
 # Install dependencies
 RUN sudo apt-get update && sudo apt-get install -y \
@@ -67,6 +68,7 @@ RUN sudo apt-get update && sudo apt-get install -y \
 		--with-zip \
 		--with-zlib \
 	&& \
+
 	make -j $(nproc) && \
 	sudo make install && \
 	cd .. && \
@@ -85,10 +87,26 @@ RUN sudo apt-get update && sudo apt-get install -y \
 	php -m | grep "gd" && \
 	php -m | grep "sockets"
 
+ENV EXT_URL https://github.com/CircleCI-Public/docker-php-extension-installer/releases/download/1.5.11/install-php-extensions
+ENV PHP_INI_DIR /etc/php.d
+
+COPY docker-php-source /usr/local/bin/
+COPY docker-php-* /usr/local/bin/
+COPY install-php-extensions /usr/local/bin/
+
+# commented out as the file is currently local
+# RUN curl -sSL ${EXT_URL} > install-php-extensions && \
+	# sudo mv install-php-extensions /usr/local/bin && \
+	# cd /usr/local/bin && \
+	# sudo chmod +x /usr/local/bin/install-php-extensions /usr/local/bin/docker-php-ext-configure /usr/local/bin/docker-php-ext-enable /usr/local/bin/docker-php-ext-install /usr/local/bin/docker-php-source
+RUN cd /usr/local/bin && \
+	sudo chmod +x /usr/local/bin/install-php-extensions /usr/local/bin/docker-php-ext-configure /usr/local/bin/docker-php-ext-enable /usr/local/bin/docker-php-ext-install /usr/local/bin/docker-php-source
+
 # Install the PHP package manager Composer
 ENV COMPOSER_VERSION 2.1.12
 RUN sudo php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
 	sudo php composer-setup.php --version=$COMPOSER_VERSION --install-dir=/usr/local/bin --filename=composer && \
 	sudo php -r "unlink('composer-setup.php');" && \
 	composer --version
+
 ENV PATH /home/circleci/.config/composer/vendor/bin:/home/circleci/.composer/vendor/bin:$PATH
