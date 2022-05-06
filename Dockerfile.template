@@ -7,7 +7,6 @@ LABEL maintainer="Community & Partner Engineering Team <community-partner@circle
 
 ENV PHP_VERSION %%VERSION_FULL%%
 ENV PHP_MINOR %%VERSION_MINOR%%
-ENV PHP_INI_DIR /etc/php.d/circleci.ini
 
 # Install dependencies
 RUN sudo apt-get update && sudo apt-get install -y \
