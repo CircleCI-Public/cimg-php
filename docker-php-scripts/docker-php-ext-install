@@ -8,18 +8,15 @@ set -e
 export CFLAGS CPPFLAGS LDFLAGS
 
 srcExists=
-# if [ -d /usr/src/php ]; then
-if [ -d /usr/local/lib/php ]; then
+if [ -d /usr/src/php ]; then
 	srcExists=1
 fi
 docker-php-source extract
 if [ -z "$srcExists" ]; then
-	# touch /usr/src/php/.docker-delete-me
-  touch /usr/local/lib/php/.docker-delete-me
+	touch /usr/src/php/.docker-delete-me
 fi
 
-# cd /usr/src/php/ext
-cd /usr/local/lib/php/extensions/no-debug-non-zts-20210902
+cd /usr/src/php/ext
 
 usage() {
 	echo "usage: $0 [-jN] [--ini-name file.ini] ext-name [ext-name ...]"
@@ -35,8 +32,8 @@ usage() {
 			-maxdepth 2 \
 			-type f \
 			-name 'config.m4' \
-		# | xargs -n1 dirname \
-		# | xargs -n1 basename \
+		| xargs -n1 dirname \
+		| xargs -n1 basename \
 		| sort \
 		| xargs
 	echo
@@ -141,7 +138,6 @@ if [ "$pm" = 'apk' ] && [ -n "$apkDel" ]; then
 	apk del --no-network $apkDel
 fi
 
-# if [ -e /usr/src/php/.docker-delete-me ]; then
-if [ -e /usr/local/lib/php/.docker-delete-me ]; then
+if [ -e /usr/src/php/.docker-delete-me ]; then
 	docker-php-source delete
 fi

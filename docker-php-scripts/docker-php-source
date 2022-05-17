@@ -1,8 +1,7 @@
 #!/bin/sh
 set -e
 
-# dir=/usr/src/php
-dir=/usr/local/lib/php
+dir=/usr/src/php
 
 usage() {
 	echo "usage: $0 COMMAND"
@@ -15,19 +14,22 @@ usage() {
 	echo
 }
 
+PHP_VER=$(php -v | awk 'NR==1{print $2}')
+PHP_URL="https://www.php.net/distributions/php-${PHP_VER}.tar.xz"
+
 case "$1" in
 	extract)
-		sudo mkdir -p "$dir"
+		mkdir -p "$dir"
 		if [ ! -f "$dir/.docker-extracted" ]; then
-      curl -fSL "https://github.com/php/php-src/archive/refs/tags/php-${PHP_VERSION}.tar.gz" > php.tar.gz && \
-      sudo mv php.tar.gz /usr/local/lib && \
-			sudo tar -xzf /usr/local/lib/php.tar.gz -C "$dir" --strip-components=1
-			sudo touch "$dir/.docker-extracted"
+			curl -fsSL -o php.tar.xz "$PHP_URL" && \
+			sudo mv php.tar.xz /usr/src && \
+			tar -Jxf /usr/src/php.tar.xz -C "$dir" --strip-components=1
+			touch "$dir/.docker-extracted"
 		fi
 		;;
 
 	delete)
-		sudo rm -rf "$dir"
+		rm -rf "$dir"
 		;;
 
 	*)

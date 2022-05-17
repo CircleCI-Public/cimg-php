@@ -86,20 +86,21 @@ RUN sudo apt-get update && sudo apt-get install -y \
 	php -m | grep "gd" && \
 	php -m | grep "sockets"
 
-ENV EXT_URL https://github.com/CircleCI-Public/docker-php-extension-installer/releases/download/1.5.11/install-php-extensions
-ENV PHP_INI_DIR /etc/php.d
 
-COPY docker-php-source /usr/local/bin/
-COPY docker-php-* /usr/local/bin/
-COPY install-php-extensions /usr/local/bin/
+	# Copies the docker-php-ext helper scripts and allows them to be used in the image
+COPY /docker-php-scripts/docker-php-* /usr/local/bin/	
 
-# commented out as the file is currently local
-# RUN curl -sSL ${EXT_URL} > install-php-extensions && \
-	# sudo mv install-php-extensions /usr/local/bin && \
-	# cd /usr/local/bin && \
-	# sudo chmod +x /usr/local/bin/install-php-extensions /usr/local/bin/docker-php-ext-configure /usr/local/bin/docker-php-ext-enable /usr/local/bin/docker-php-ext-install /usr/local/bin/docker-php-source
 RUN cd /usr/local/bin && \
-	sudo chmod +x /usr/local/bin/install-php-extensions /usr/local/bin/docker-php-ext-configure /usr/local/bin/docker-php-ext-enable /usr/local/bin/docker-php-ext-install /usr/local/bin/docker-php-source
+	sudo chmod +x /usr/local/bin/docker-php-ext-configure /usr/local/bin/docker-php-ext-enable /usr/local/bin/docker-php-ext-install /usr/local/bin/docker-php-source
+
+ENV PHP_INI_DIR /usr/local/etc/php
+
+RUN sudo mkdir -p "$PHP_INI_DIR/conf.d"; \
+	# allow running as an arbitrary user (https://github.com/docker-library/php/issues/743)
+	[ ! -d /var/www/html ]; \
+	sudo mkdir -p /var/www/html; \
+	sudo chown www-data:www-data /var/www/html; \
+	sudo chmod 777 /var/www/html
 
 # Install the PHP package manager Composer
 ENV COMPOSER_VERSION 2.1.12

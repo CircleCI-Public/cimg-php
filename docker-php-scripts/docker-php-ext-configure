@@ -8,19 +8,15 @@ set -e
 export CFLAGS CPPFLAGS LDFLAGS
 
 srcExists=
-# if [ -d /usr/src/php ]; then
-# 	srcExists=1
-if [ -d /usr/local/lib/php ]; then
+if [ -d /usr/src/php ]; then
 	srcExists=1
 fi
 docker-php-source extract
 if [ -z "$srcExists" ]; then
-	# touch /usr/src/php/.docker-delete-me
-  touch /usr/local/lib/php/.docker-delete-me
+	touch /usr/src/php/.docker-delete-me
 fi
 
-# cd /usr/src/php/ext
-cd /usr/local/lib/php/extensions/no-debug-non-zts-20210902
+cd /usr/src/php/ext
 
 usage() {
 	echo "usage: $0 ext-name [configure flags]"
@@ -32,18 +28,10 @@ usage() {
 			-maxdepth 2 \
 			-type f \
 			-name 'config.m4' \
+		| xargs -n1 dirname \
+		| xargs -n1 basename \
 		| sort \
 		| xargs
-    # commented these out as they were not finding anything
-    # | xargs -n1 dirname \
-		# | xargs -n1 basename \
-    
-    # returns this
-    # /usr/bin/dirname: missing operand
-    # Try '/usr/bin/dirname --help' for more information.
-    # /usr/bin/basename: missing operand
-    # Try '/usr/bin/basename --help' for more information.
-
 	echo
 	echo 'Some of the above modules are already compiled into PHP; please check'
 	echo 'the output of "php -i" to see which modules are already loaded.'
