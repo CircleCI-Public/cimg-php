@@ -60,15 +60,17 @@ For example, to install pcov, the following command can be run:
 sudo pecl install pcov
 ```
 
-Occassionally, you'll also need to enable an extension:
+Docker PHP Helper scripts help to install Core extensions that are bundled with PHP.
+
+One way to add [supported packages](https://github.com/mlocati/docker-php-extension-installer) is through mlocati's extension installer:
 
 ```bash
-sudo -E docker-php-ext-enable pcov
+sudo -E install-php-extensions xsl xdebug
+# Occassionally, you'll will also need to enable an extension:
+sudo docker-php-ext-enable xdebug
 ```
 
-Docker PHP Helper scripts help to install Core extensions that are bundled with PHP. As an additional note, sudo may need
-to run with the -E flag in order to persist variables like the PHP_INI_DIR
-
+Alternatively,
 ```bash
 sudo docker-php-source extract && \
 # To include configuration options, the sudo docker-php-ext-configure command and --with- flag can be used
