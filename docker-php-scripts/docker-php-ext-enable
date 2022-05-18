@@ -87,8 +87,10 @@ for module in $modules; do
 	if readelf --wide --syms "$moduleFile" | grep -q ' zend_extension_entry$'; then
 		# https://wiki.php.net/internals/extensions#loading_zend_extensions
 		line="zend_extension=$module"
+		echo "$line" | sudo tee -a /etc/php.d/circleci.ini
 	else
 		line="extension=$module"
+		echo "$line" | sudo tee -a /etc/php.d/circleci.ini
 	fi
 
 	ext="$(basename "$module")"
@@ -112,7 +114,7 @@ for module in $modules; do
 			;;
 	esac
 	if ! grep -qFx -e "$line" -e "$line.so" "$ini" 2>/dev/null; then
-		echo "$line" >> "$ini"
+		echo "$line" | sudo tee -a /etc/php.d/circleci.ini
 	fi
 done
 

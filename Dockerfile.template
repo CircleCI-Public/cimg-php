@@ -88,10 +88,11 @@ RUN sudo apt-get update && sudo apt-get install -y \
 
 
 	# Copies the docker-php-ext helper scripts and allows them to be used in the image
-COPY /docker-php-scripts/docker-php-* /usr/local/bin/	
+COPY /docker-php-scripts/docker-php-* /usr/local/bin/
+COPY /docker-php-scripts/install-php-extensions /usr/local/bin/	
 
 RUN cd /usr/local/bin && \
-	sudo chmod +x /usr/local/bin/docker-php-ext-configure /usr/local/bin/docker-php-ext-enable /usr/local/bin/docker-php-ext-install /usr/local/bin/docker-php-source
+	sudo chmod +x /usr/local/bin/install-php-extensions /usr/local/bin/docker-php-ext-configure /usr/local/bin/docker-php-ext-enable /usr/local/bin/docker-php-ext-install /usr/local/bin/docker-php-source
 
 ENV PHP_INI_DIR /usr/local/etc/php
 
