@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 set -e
 
 # prefer user supplied CFLAGS, but default to our PHP_CFLAGS

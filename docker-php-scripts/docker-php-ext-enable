@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 set -e
 
 extDir="$(php -d 'display_errors=stderr' -r 'echo ini_get("extension_dir");')"
