@@ -10,6 +10,7 @@ workflows:
       - cimg-orb/build-and-deploy:
           publish-branch: mlocati
           image: cimg/php
+          context: cimg-publishing
   update-readme:
     when:
       equal: [main, << pipeline.git.branch >>]
