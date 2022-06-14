@@ -2,20 +2,15 @@ version: 2.1
 
 orbs:
   sonar: hubci/sonar@1.0.0
-  cimg-orb: circleci/cimg-orb@0.1.4
+  cimg-orb: circleci/cimg-orb@0.1.2
 
 workflows:
   main:
     jobs:
       - cimg-orb/build-and-deploy:
-          publish-branch: mlocati
+          working-dir: ./
+          publish-branch: main
           image: cimg/php
-          context: cimg-publishing
   update-readme:
     when:
       equal: [main, << pipeline.git.branch >>]
-    jobs:
-      - sonar/update-readme:
-          version: "0.15.0"
-          image: cimg/php
-          context: cimg-publishing
