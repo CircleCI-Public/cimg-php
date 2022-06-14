@@ -11,6 +11,4 @@ workflows:
           working-dir: ./
           publish-branch: main
           image: cimg/php
-  update-readme:
-    when:
-      equal: [main, << pipeline.git.branch >>]
+          
