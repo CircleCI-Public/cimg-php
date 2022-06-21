@@ -52,12 +52,31 @@ This image contains the PHP programming language as well as Composer and a few v
 
 ### PHP Extensions
 
-This image contains [PEAR](https://pear.php.net/) and [PECL](https://pecl.php.net/).
+This image contains [PEAR](https://pear.php.net/), [PECL](https://pecl.php.net/), and Docker PHP Helper scripts
 These tools can be used to install various PHP extensions and utilities.
 For example, to install pcov, the following command can be run:
 
 ```bash
 sudo pecl install pcov
+```
+
+Docker PHP Helper scripts help to install Core extensions that are bundled with PHP.
+
+One way to add [supported packages](https://github.com/mlocati/docker-php-extension-installer) is through mlocati's extension installer:
+
+```bash
+sudo -E install-php-extensions xsl xdebug
+# Occassionally, you'll will also need to enable an extension:
+sudo docker-php-ext-enable xdebug
+```
+
+Alternatively,
+```bash
+sudo docker-php-source extract && \
+# To include configuration options, the sudo docker-php-ext-configure command and --with- flag can be used
+sudo docker-php-ext-install iconv && \
+sudo -E docker-php-ext-enable iconv	&& \
+docker-php-source delete
 ```
 
 Older versions of this image suggested installing extensions via `apt-get`.
