@@ -1,11 +1,11 @@
 # vim:set ft=dockerfile:
 
 # Do not edit individual Dockerfiles manually. Instead, please make changes to the Dockerfile.template, which will be used by the build script to generate Dockerfiles.
-FROM cimg/base:2022.06
+FROM cimg/base:2022.08
 
 LABEL maintainer="Community & Partner Engineering Team <community-partner@circleci.com>"
 
-ENV PHP_VERSION 7.4.30
+ENV PHP_VERSION 7.4.32
 ENV PHP_MINOR 7.4
 
 # Install dependencies
@@ -86,7 +86,7 @@ RUN sudo apt-get update && sudo apt-get install -y \
 	php -m | grep "gd" && \
 	php -m | grep "sockets"
 
-# Installs intall-php-extensions functionality to add, enable, and configurae PHP extensions. The script is modified to
+# Installs install-php-extensions functionality to add, enable, and configurae PHP extensions. The script is modified to
 # work with CircleCI's environment. Updates to the script should be accompanied with a release in it's respective
 # repositpory
 
