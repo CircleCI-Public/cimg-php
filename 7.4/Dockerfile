@@ -5,7 +5,7 @@ FROM cimg/base:2022.08
 
 LABEL maintainer="Community & Partner Engineering Team <community-partner@circleci.com>"
 
-ENV PHP_VERSION 7.4.31
+ENV PHP_VERSION 7.4.32
 ENV PHP_MINOR 7.4
 
 # Install dependencies
