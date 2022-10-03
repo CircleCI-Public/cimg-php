@@ -5,7 +5,7 @@ FROM cimg/base:2022.08
 
 LABEL maintainer="Community & Partner Engineering Team <community-partner@circleci.com>"
 
-ENV PHP_VERSION 8.0.22
+ENV PHP_VERSION 8.0.23
 ENV PHP_MINOR 8.0
 
 # Install dependencies
@@ -86,7 +86,7 @@ RUN sudo apt-get update && sudo apt-get install -y \
 	php -m | grep "gd" && \
 	php -m | grep "sockets"
 
-# Installs intall-php-extensions functionality to add, enable, and configurae PHP extensions. The script is modified to
+# Installs install-php-extensions functionality to add, enable, and configurae PHP extensions. The script is modified to
 # work with CircleCI's environment. Updates to the script should be accompanied with a release in it's respective
 # repositpory
 
