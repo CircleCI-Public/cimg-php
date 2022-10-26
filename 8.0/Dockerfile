@@ -1,11 +1,15 @@
 # vim:set ft=dockerfile:
 
 # Do not edit individual Dockerfiles manually. Instead, please make changes to the Dockerfile.template, which will be used by the build script to generate Dockerfiles.
-FROM cimg/base:2022.08
+
+# By policy, the base image tag should be a quarterly tag unless there's a 
+# specific reason to use a different one. This means January, April, July, or 
+# October.
+FROM cimg/base:2022.10
 
 LABEL maintainer="Community & Partner Engineering Team <community-partner@circleci.com>"
 
-ENV PHP_VERSION 8.0.24
+ENV PHP_VERSION 8.0.25
 ENV PHP_MINOR 8.0
 
 # Install dependencies
