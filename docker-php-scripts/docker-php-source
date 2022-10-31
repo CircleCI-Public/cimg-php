@@ -14,7 +14,7 @@ usage() {
 	echo
 }
 
-PHP_VER=$(php -v | awk 'NR==1{print $2}')
+PHP_VER=$(php -v | xargs | awk -F 'PHP ' '{print $2}' | awk '{print $1}')
 PHP_URL="https://www.php.net/distributions/php-${PHP_VER}.tar.xz"
 
 case "$1" in
