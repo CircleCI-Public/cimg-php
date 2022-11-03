@@ -7,7 +7,8 @@
 # October.
 
 # NOTE: This uses the November image due to an OpenSSL CVE. Using the quarterly image will resume in Q1
-FROM cimg/base:2022.11
+##### NOTE: PHP Versions < 8.1 need use Ubuntu 20.04 due OpenSSL/libssl. Please adjust accordingly #####
+FROM cimg/base:2022.10-20.04
 
 LABEL maintainer="Community & Partner Engineering Team <community-partner@circleci.com>"
 
