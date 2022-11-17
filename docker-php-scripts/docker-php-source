@@ -14,7 +14,7 @@ usage() {
 	echo
 }
 
-PHP_VER=$(php -v | awk 'NR==1{print $2}')
+PHP_VER=$(php -v | grep 'PHP [0-9]\.[0-9]' | awk '{print $2}')
 PHP_URL="https://www.php.net/distributions/php-${PHP_VER}.tar.xz"
 
 case "$1" in
