@@ -7,11 +7,12 @@
 # October.
 
 # NOTE: This uses the November image due to an OpenSSL CVE. Using the quarterly image will resume in Q1
+##### NOTE: PHP Versions < 8.1 need use Ubuntu 20.04 due OpenSSL/libssl. Please adjust accordingly #####
 FROM cimg/base:2022.11
 
 LABEL maintainer="Community & Partner Engineering Team <community-partner@circleci.com>"
 
-ENV PHP_VERSION 8.1.12
+ENV PHP_VERSION 8.1.13
 ENV PHP_MINOR 8.1
 
 # Install dependencies
