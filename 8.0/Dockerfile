@@ -2,13 +2,12 @@
 
 # Do not edit individual Dockerfiles manually. Instead, please make changes to the Dockerfile.template, which will be used by the build script to generate Dockerfiles.
 
-# By policy, the base image tag should be a quarterly tag unless there's a 
-# specific reason to use a different one. This means January, April, July, or 
+# By policy, the base image tag should be a quarterly tag unless there's a
+# specific reason to use a different one. This means January, April, July, or
 # October.
 
-# NOTE: This uses the November image due to an OpenSSL CVE. Using the quarterly image will resume in Q1
 ##### NOTE: PHP Versions < 8.1 need use Ubuntu 20.04 due OpenSSL/libssl. Please adjust accordingly #####
-FROM cimg/base:2023.01
+FROM cimg/base:2023.01-20.04
 
 LABEL maintainer="Community & Partner Engineering Team <community-partner@circleci.com>"
 
@@ -108,7 +107,7 @@ RUN sudo mkdir -p "$PHP_INI_DIR/conf.d"  && \
 	sudo chmod +x /usr/local/bin/docker-php-* /usr/local/bin/install-php-extensions
 
 # Install the PHP package manager Composer
-ENV COMPOSER_VERSION 2.1.12
+ENV COMPOSER_VERSION 2.5.1
 RUN sudo php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
 	sudo php composer-setup.php --version=$COMPOSER_VERSION --install-dir=/usr/local/bin --filename=composer && \
 	sudo php -r "unlink('composer-setup.php');" && \
