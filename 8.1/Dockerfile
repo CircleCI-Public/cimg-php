@@ -11,7 +11,7 @@ FROM cimg/base:2023.01
 
 LABEL maintainer="Community & Partner Engineering Team <community-partner@circleci.com>"
 
-ENV PHP_VERSION 8.1.14
+ENV PHP_VERSION 8.1.15
 ENV PHP_MINOR 8.1
 
 # Install dependencies
@@ -107,7 +107,7 @@ RUN sudo mkdir -p "$PHP_INI_DIR/conf.d"  && \
 	sudo chmod +x /usr/local/bin/docker-php-* /usr/local/bin/install-php-extensions
 
 # Install the PHP package manager Composer
-ENV COMPOSER_VERSION 2.1.12
+ENV COMPOSER_VERSION 2.5.1
 RUN sudo php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
 	sudo php composer-setup.php --version=$COMPOSER_VERSION --install-dir=/usr/local/bin --filename=composer && \
 	sudo php -r "unlink('composer-setup.php');" && \
