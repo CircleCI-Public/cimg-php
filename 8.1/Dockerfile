@@ -11,8 +11,8 @@ FROM cimg/base:2023.01
 
 LABEL maintainer="Community & Partner Engineering Team <community-partner@circleci.com>"
 
-ENV PHP_VERSION 8.1.15
-ENV PHP_MINOR 8.1
+ENV PHP_VERSION=8.1.16
+ENV PHP_MINOR=8.1
 
 # Install dependencies
 RUN sudo apt-get update && sudo apt-get install -y \
@@ -96,8 +96,8 @@ RUN sudo apt-get update && sudo apt-get install -y \
 # work with CircleCI's environment. Updates to the script should be accompanied with a release in it's respective
 # repositpory
 
-ENV EXT_URL https://github.com/CircleCI-Public/docker-php-extension-installer/releases/latest/download/install-php-extensions
-ENV PHP_INI_DIR /usr/local/etc/php
+ENV EXT_URL=https://github.com/CircleCI-Public/docker-php-extension-installer/releases/latest/download/install-php-extensions
+ENV PHP_INI_DIR=/usr/local/etc/php
 
 COPY /docker-php-scripts/docker-php-* /usr/local/bin/
 
@@ -107,7 +107,7 @@ RUN sudo mkdir -p "$PHP_INI_DIR/conf.d"  && \
 	sudo chmod +x /usr/local/bin/docker-php-* /usr/local/bin/install-php-extensions
 
 # Install the PHP package manager Composer
-ENV COMPOSER_VERSION 2.5.1
+ENV COMPOSER_VERSION=2.5.1
 RUN sudo php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
 	sudo php composer-setup.php --version=$COMPOSER_VERSION --install-dir=/usr/local/bin --filename=composer && \
 	sudo php -r "unlink('composer-setup.php');" && \
