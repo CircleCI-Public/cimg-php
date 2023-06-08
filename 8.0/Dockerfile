@@ -7,11 +7,11 @@
 # October.
 
 ##### NOTE: PHP Versions < 8.1 need use Ubuntu 20.04 due OpenSSL/libssl. Please adjust accordingly #####
-FROM cimg/base:2023.01-20.04
+FROM cimg/base:2023.04
 
 LABEL maintainer="Community & Partner Engineering Team <community-partner@circleci.com>"
 
-ENV PHP_VERSION=8.0.28
+ENV PHP_VERSION=8.0.29
 ENV PHP_MINOR=8.0
 
 # Install dependencies
