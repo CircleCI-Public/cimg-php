@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # Do not edit by hand; please use build scripts/templates to make changes
+set -eo pipefail
 
-docker build --file 8.2/Dockerfile -t cimg/php:8.2.8 -t cimg/php:8.2 --platform linux/amd64 .
-docker build --file 8.2/node/Dockerfile -t cimg/php:8.2.8-node -t cimg/php:8.2-node --platform linux/amd64 .
-docker build --file 8.2/browsers/Dockerfile -t cimg/php:8.2.8-browsers -t cimg/php:8.2-browsers --platform linux/amd64 .
-docker build --file 8.1/Dockerfile -t cimg/php:8.1.21 -t cimg/php:8.1 --platform linux/amd64 .
-docker build --file 8.1/node/Dockerfile -t cimg/php:8.1.21-node -t cimg/php:8.1-node --platform linux/amd64 .
-docker build --file 8.1/browsers/Dockerfile -t cimg/php:8.1.21-browsers -t cimg/php:8.1-browsers --platform linux/amd64 .
+docker context create cimg
+docker buildx create --use cimg
+docker buildx build --platform=linux/amd64,linux/arm64 --file 8.2/Dockerfile -t cimg/php:8.2.9 -t cimg/php:8.2 --push .
+docker buildx build --platform=linux/amd64,linux/arm64 --file 8.2/node/Dockerfile -t cimg/php:8.2.9-node -t cimg/php:8.2-node --push .
+docker buildx build --platform=linux/amd64 --file 8.2/browsers/Dockerfile -t cimg/php:8.2.9-browsers -t cimg/php:8.2-browsers --push .
