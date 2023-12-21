@@ -7,7 +7,7 @@
 # October.
 
 ##### NOTE: PHP Versions < 8.1 need use Ubuntu 20.04 due OpenSSL/libssl. Please adjust accordingly #####
-FROM cimg/%%PARENT%%:2023.07
+FROM cimg/%%PARENT%%:2024.01
 
 LABEL maintainer="CircleCI Execution Team <eng-execution@circleci.com>"
 
