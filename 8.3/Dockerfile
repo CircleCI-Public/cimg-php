@@ -11,7 +11,7 @@ FROM cimg/base:2024.01
 
 LABEL maintainer="CircleCI Execution Team <eng-execution@circleci.com>"
 
-ENV PHP_VERSION=8.3.1
+ENV PHP_VERSION=8.3.2
 ENV PHP_MINOR=8.3
 
 # Install dependencies
