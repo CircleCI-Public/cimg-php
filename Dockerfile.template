@@ -107,7 +107,7 @@ RUN sudo mkdir -p "$PHP_INI_DIR/conf.d"  && \
 	sudo chmod +x /usr/local/bin/docker-php-* /usr/local/bin/install-php-extensions
 
 # Install the PHP package manager Composer
-ENV COMPOSER_VERSION=2.5.1
+ENV COMPOSER_VERSION=2.7.7
 RUN sudo php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
 	sudo php composer-setup.php --version=$COMPOSER_VERSION --install-dir=/usr/local/bin --filename=composer && \
 	sudo php -r "unlink('composer-setup.php');" && \
