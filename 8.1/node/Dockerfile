@@ -1,6 +1,6 @@
 # vim:set ft=dockerfile:
 
-FROM cimg/php:8.1.33
+FROM cimg/php:8.1.34
 
 LABEL maintainer="Community & Partner Engineering Team <community-partner@circleci.com>"
 
