@@ -15,15 +15,15 @@ usage() {
 }
 
 PHP_VER=$(php -v | grep 'PHP [0-9]\.[0-9]' | awk '{print $2}')
-PHP_URL="https://www.php.net/distributions/php-${PHP_VER}.tar.xz"
+PHP_URL="https://github.com/php/php-src/archive/refs/tags/php-${PHP_VER}.tar.gz"
 
 case "$1" in
 	extract)
 		mkdir -p "$dir"
 		if [ ! -f "$dir/.docker-extracted" ]; then
-			curl -fsSL -o php.tar.xz "$PHP_URL" && \
-			sudo mv php.tar.xz /usr/src && \
-			tar -Jxf /usr/src/php.tar.xz -C "$dir" --strip-components=1
+			curl -fsSL -o php.tar.gz "$PHP_URL" && \
+			sudo mv php.tar.gz /usr/src && \
+			tar -zxf /usr/src/php.tar.gz -C "$dir" --strip-components=1
 			touch "$dir/.docker-extracted"
 		fi
 		;;
