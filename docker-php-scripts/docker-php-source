@@ -14,17 +14,49 @@ usage() {
 	echo
 }
 
-PHP_VER=$(php -v | grep 'PHP [0-9]\.[0-9]' | awk '{print $2}')
-PHP_URL="https://www.php.net/distributions/php-${PHP_VER}.tar.xz"
+# Use PHP_VERSION for reliable version detection (avoids parsing php -v output).
+PHP_VER=$(php -r 'echo PHP_VERSION;')
+PHP_URL_PRIMARY="https://www.php.net/distributions/php-${PHP_VER}.tar.xz"
+PHP_URL_MIRROR="https://www.php.net/get/php-${PHP_VER}.tar.xz/from/this/mirror"
+PHP_URL_DOWNLOADS="https://downloads.php.net/~phpweb/php-${PHP_VER}.tar.xz"
+PHP_URL_GITHUB="https://github.com/php/php-src/archive/refs/tags/php-${PHP_VER}.tar.gz"
+
+# Download with retries and fallback URLs so 503 or php.net unavailability does not break docker-php-ext-install.
+download() {
+	local url="${1:?missing url}"
+	echo "Downloading: ${url}"
+	rm -f /tmp/php.tar.xz /tmp/php.tar.gz
+	if echo "${url}" | grep -qE '\.tar\.gz($|\?)'; then
+		curl -4 -fSL --retry 2 --retry-all-errors --retry-delay 2 -o /tmp/php.tar.gz "${url}"
+	else
+		curl -4 -fSL --retry 2 --retry-all-errors --retry-delay 2 -o /tmp/php.tar.xz "${url}"
+	fi
+}
+
+extract_source() {
+	rm -rf "$dir"
+	mkdir -p "$dir"
+	if [ -f /tmp/php.tar.xz ]; then
+		tar -xJf /tmp/php.tar.xz -C "$dir" --strip-components=1
+	elif [ -f /tmp/php.tar.gz ]; then
+		tar -xzf /tmp/php.tar.gz -C "$dir" --strip-components=1
+	else
+		echo "No PHP source archive found in /tmp" >&2
+		exit 1
+	fi
+	touch "$dir/.docker-extracted"
+	rm -f /tmp/php.tar.xz /tmp/php.tar.gz
+}
 
 case "$1" in
 	extract)
 		mkdir -p "$dir"
 		if [ ! -f "$dir/.docker-extracted" ]; then
-			curl -fsSL -o php.tar.xz "$PHP_URL" && \
-			sudo mv php.tar.xz /usr/src && \
-			tar -Jxf /usr/src/php.tar.xz -C "$dir" --strip-components=1
-			touch "$dir/.docker-extracted"
+			download "$PHP_URL_PRIMARY" \
+				|| download "$PHP_URL_MIRROR" \
+				|| download "$PHP_URL_DOWNLOADS" \
+				|| download "$PHP_URL_GITHUB"
+			extract_source
 		fi
 		;;
 
