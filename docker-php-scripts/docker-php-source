@@ -27,9 +27,9 @@ download() {
 	echo "Downloading: ${url}"
 	rm -f /tmp/php.tar.xz /tmp/php.tar.gz
 	if echo "${url}" | grep -qE '\.tar\.gz($|\?)'; then
-		curl -4 -fSL --retry 2 --retry-all-errors --retry-delay 2 -o /tmp/php.tar.gz "${url}"
+		curl -4 -fSL --retry 2 --retry-delay 2 -o /tmp/php.tar.gz "${url}"
 	else
-		curl -4 -fSL --retry 2 --retry-all-errors --retry-delay 2 -o /tmp/php.tar.xz "${url}"
+		curl -4 -fSL --retry 2 --retry-delay 2 -o /tmp/php.tar.xz "${url}"
 	fi
 }
 
