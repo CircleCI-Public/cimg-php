@@ -7,11 +7,11 @@
 # October.
 
 ##### NOTE: PHP Versions < 8.1 need use Ubuntu 20.04 due OpenSSL/libssl. Please adjust accordingly #####
-FROM cimg/base:2024.02
+FROM cimg/base:2026.03-22.04
 
 LABEL maintainer="CircleCI Execution Team <eng-execution@circleci.com>"
 
-ENV PHP_VERSION=8.3.30
+ENV PHP_VERSION=8.3.31
 ENV PHP_MINOR=8.3
 
 # Install dependencies
@@ -107,7 +107,7 @@ RUN sudo mkdir -p "$PHP_INI_DIR/conf.d"  && \
 	sudo chmod +x /usr/local/bin/docker-php-* /usr/local/bin/install-php-extensions
 
 # Install the PHP package manager Composer
-ENV COMPOSER_VERSION=2.8.4
+ENV COMPOSER_VERSION=2.9.5
 RUN sudo php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
 	sudo php composer-setup.php --version=$COMPOSER_VERSION --install-dir=/usr/local/bin --filename=composer && \
 	sudo php -r "unlink('composer-setup.php');" && \
