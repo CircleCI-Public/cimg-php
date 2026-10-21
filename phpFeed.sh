@@ -11,7 +11,8 @@ fi
 
 getPHPVersion() {
   RSS_URL="https://github.com/php/php-src/tags.atom"
-  VERSIONS=$(curl --silent "$RSS_URL" | grep -E '(title)' | tail -n +2 | sed -e 's/^[ \t]*//' | sed -e 's/<title>//' -e 's/<\/title>//')
+  # parse tag names from each entry's <id>; <title> may be a release name like "PHP 8.5.12" instead of the tag
+  VERSIONS=$(curl --silent "$RSS_URL" | grep -oE '<id>tag:github\.com,2008:Repository/[0-9]+/[^<]+</id>' | sed -E 's|.*/([^/<]+)</id>|\1|')
 
   for version in $VERSIONS; do
     if [[ $version =~ ^php-[0-9]+(\.[0-9]+)*$ ]]; then
