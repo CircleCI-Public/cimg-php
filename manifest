@@ -2,6 +2,9 @@
 
 repository=php
 parent=base
+base_version=2026.11-22.04
+new_version=2026.11-26.04
+new_tags=(8.6)
 variants=(node browsers)
 namespace=cimg
 arm64=1

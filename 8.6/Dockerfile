@@ -7,7 +7,7 @@
 # October.
 
 ##### NOTE: PHP Versions < 8.1 need use Ubuntu 20.04 due OpenSSL/libssl. Please adjust accordingly #####
-FROM cimg/base:2026.10-22.04
+FROM cimg/base:2026.11-26.04
 
 LABEL maintainer="CircleCI Execution Team <eng-execution@circleci.com>"
 
@@ -21,6 +21,7 @@ RUN sudo apt-get update && sudo apt-get install -y \
 		build-essential \
 		libcurl4-openssl-dev \
 		libfreetype6-dev \
+		libicu-dev \
 		libjpeg-dev \
 		libonig-dev \
 		libpng-dev \
