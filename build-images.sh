@@ -4,15 +4,15 @@ set -eo pipefail
 
 docker context create cimg
 docker buildx create --use cimg
-docker buildx build --platform=linux/amd64,linux/arm64 --file 8.5/Dockerfile -t cimg/php:8.5.12 -t cimg/php:8.5 --push .
-docker buildx build --platform=linux/amd64,linux/arm64 --file 8.5/node/Dockerfile -t cimg/php:8.5.12-node -t cimg/php:8.5-node --push .
-docker buildx build --platform=linux/amd64 --file 8.5/browsers/Dockerfile -t cimg/php:8.5.12-browsers -t cimg/php:8.5-browsers --push .
-docker buildx build --platform=linux/amd64,linux/arm64 --file 8.4/Dockerfile -t cimg/php:8.4.27 -t cimg/php:8.4 --push .
-docker buildx build --platform=linux/amd64,linux/arm64 --file 8.4/node/Dockerfile -t cimg/php:8.4.27-node -t cimg/php:8.4-node --push .
-docker buildx build --platform=linux/amd64 --file 8.4/browsers/Dockerfile -t cimg/php:8.4.27-browsers -t cimg/php:8.4-browsers --push .
-docker buildx build --platform=linux/amd64,linux/arm64 --file 8.3/Dockerfile -t cimg/php:8.3.36 -t cimg/php:8.3 --push .
-docker buildx build --platform=linux/amd64,linux/arm64 --file 8.3/node/Dockerfile -t cimg/php:8.3.36-node -t cimg/php:8.3-node --push .
-docker buildx build --platform=linux/amd64 --file 8.3/browsers/Dockerfile -t cimg/php:8.3.36-browsers -t cimg/php:8.3-browsers --push .
-docker buildx build --platform=linux/amd64,linux/arm64 --file 8.2/Dockerfile -t cimg/php:8.2.35 -t cimg/php:8.2 --push .
-docker buildx build --platform=linux/amd64,linux/arm64 --file 8.2/node/Dockerfile -t cimg/php:8.2.35-node -t cimg/php:8.2-node --push .
-docker buildx build --platform=linux/amd64 --file 8.2/browsers/Dockerfile -t cimg/php:8.2.35-browsers -t cimg/php:8.2-browsers --push .
+docker buildx build --platform=linux/amd64,linux/arm64 --file 8.5/Dockerfile -t cimg/php:8.5.13 -t cimg/php:8.5 --push .
+docker buildx build --platform=linux/amd64,linux/arm64 --file 8.5/node/Dockerfile -t cimg/php:8.5.13-node -t cimg/php:8.5-node --push .
+docker buildx build --platform=linux/amd64 --file 8.5/browsers/Dockerfile -t cimg/php:8.5.13-browsers -t cimg/php:8.5-browsers --push .
+docker buildx build --platform=linux/amd64,linux/arm64 --file 8.4/Dockerfile -t cimg/php:8.4.28 -t cimg/php:8.4 --push .
+docker buildx build --platform=linux/amd64,linux/arm64 --file 8.4/node/Dockerfile -t cimg/php:8.4.28-node -t cimg/php:8.4-node --push .
+docker buildx build --platform=linux/amd64 --file 8.4/browsers/Dockerfile -t cimg/php:8.4.28-browsers -t cimg/php:8.4-browsers --push .
+docker buildx build --platform=linux/amd64,linux/arm64 --file 8.3/Dockerfile -t cimg/php:8.3.37 -t cimg/php:8.3 --push .
+docker buildx build --platform=linux/amd64,linux/arm64 --file 8.3/node/Dockerfile -t cimg/php:8.3.37-node -t cimg/php:8.3-node --push .
+docker buildx build --platform=linux/amd64 --file 8.3/browsers/Dockerfile -t cimg/php:8.3.37-browsers -t cimg/php:8.3-browsers --push .
+docker buildx build --platform=linux/amd64,linux/arm64 --file 8.2/Dockerfile -t cimg/php:8.2.36 -t cimg/php:8.2 --push .
+docker buildx build --platform=linux/amd64,linux/arm64 --file 8.2/node/Dockerfile -t cimg/php:8.2.36-node -t cimg/php:8.2-node --push .
+docker buildx build --platform=linux/amd64 --file 8.2/browsers/Dockerfile -t cimg/php:8.2.36-browsers -t cimg/php:8.2-browsers --push .
